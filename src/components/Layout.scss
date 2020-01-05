@@ -1,0 +1,37 @@
+.logo {
+	width: 125px;
+	height: 31px;
+	margin: 16px 24px 16px 0;
+	float: left;
+}
+a {
+	color: white;
+	display: inline;
+}
+.logout {
+	width: 150px;
+	height: 31;
+	margin: 16px 24px 16px 0;
+	float: right;
+	button {
+		width: 100%;
+		height: 31px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background: none;
+		outline: 0;
+		cursor: pointer;
+		border: 0;
+		h4 {
+			color: rgba(255, 255, 255, 0.65);
+			font-size: 14px;
+			margin-bottom: 0;
+		}
+		&:hover {
+			h4 {
+				color: #fff;
+			}
+		}
+	}
+}

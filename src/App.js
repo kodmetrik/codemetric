@@ -1,26 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import LoginPage from './views/LoginPage';
+import Dashboard from './views/Dashboard'
+import { BrowserRouter as Router,Route} from 'react-router-dom'
+import { withAuth } from './Session'
+import * as ROUTES from './constants/routes';
+import GraphsPage from './views/Graphs';
+import PrivateRoute from './utils/PrivateRoute'
+class App extends React.Component {
+  render(){
+    return (
+        <Router>
+          <Route exact path={ROUTES.LANDING} component={LoginPage} />
+          <PrivateRoute exact path={ROUTES.DASHBOARD} component={Dashboard}/>
+          <PrivateRoute path={ROUTES.GRAPHS} component={GraphsPage}  exact />
+        </Router>
+    );
+  }
 }
 
-export default App;
+export default withAuth(App);

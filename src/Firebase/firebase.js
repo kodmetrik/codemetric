@@ -21,7 +21,6 @@ class Firebase{
     this.db= firebase.firestore()
   }
   addCustomers(list){
-    debugger
     list.forEach((customer) => {
       this.db.collection("customers").add(customer)
     })

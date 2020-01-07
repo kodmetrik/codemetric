@@ -48,7 +48,6 @@ class Login extends Component {
         passwordError: ''
       })
       const user = await this.props.firebase.login(this.state.email, this.state.password)
-      debugger
       if(user){
         this.props.history.push(DASHBOARD)
       }

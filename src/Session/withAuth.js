@@ -13,16 +13,20 @@ const withAuthentication = Component => {
       super(props);
 
       this.state = {
-        authUser: null
+        authUser: JSON.parse(localStorage.getItem('authUser'))
       };
     }
     componentDidMount() {
       // TIP: Giriş yapıldı mı kontorlü
       // WARN: Listener component unmount olduğunda kaldırlmazsa performans kaybına neden olur.
       this.listener = this.props.firebase.auth.onAuthStateChanged(authUser => {
-        authUser
-          ? this.setState({ authUser })
-          : this.setState({ authUser: null });
+        if(authUser){
+          localStorage.setItem('authUser',JSON.stringify(authUser))
+          this.setState({ authUser });
+          return
+        }
+        localStorage.setItem('authUser', JSON.stringify(authUser))
+        this.setState({authUser: null})
       });
     }
     componentWillUnmount() {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { withFirebase } from '../../Firebase/context';
+import withAuth from '../../Session/withAuth'
 import { Card, Row,Input,Button,Form,Icon } from 'antd'
 import { Typography } from 'antd';
 import './Login.scss'
@@ -15,6 +16,12 @@ class Login extends Component {
     password:'',
     emailError:'',
     passwordError: ''
+  }
+  componentDidMount = () => {
+    const authUser = JSON.parse(localStorage.getItem('authUser'));
+    if(authUser){
+      this.props.history.push(DASHBOARD)
+    }
   }
   checkEmailIsValid = () =>{
     return emailRegex.test(this.state.email)
@@ -88,9 +95,8 @@ class Login extends Component {
             </Row>
           </Form>
         </Card>
-        
       </div>
     )
   }
 }
-export default  withRouter(withFirebase(Login))
+export default withAuth(withRouter(Login))

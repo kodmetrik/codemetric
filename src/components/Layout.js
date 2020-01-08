@@ -17,10 +17,9 @@ class Container extends React.Component {
   onCollapse = collapsed => {
     this.setState({ collapsed });
   };
-  handleLogout = async() => {
+  handleLogout = () => {
     try {
-      await this.props.firebase.signOut()
-      this.props.history.push('/')
+      this.props.firebase.signOut()
     } catch (error) {
       this.setState({error})
     }

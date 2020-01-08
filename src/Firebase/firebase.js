@@ -37,8 +37,10 @@ class Firebase{
   login=(email,password) => {
     return this.auth.signInWithEmailAndPassword(email,password)
   }
-  signOut= () => {
+  signOut =async () => {
     this.auth.signOut()
+    localStorage.removeItem('authUser')
+    return Promise.resolve()
   }
 }
 export default Firebase

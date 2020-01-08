@@ -7,7 +7,7 @@ import { Typography } from 'antd';
 import './Login.scss'
 import { DASHBOARD } from '../../constants/routes'
 
-const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/ig
+const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
 const spaceRegex = /[^-\s]/gi
 const { Title } = Typography;
 class Login extends Component {
@@ -23,15 +23,17 @@ class Login extends Component {
       this.props.history.push(DASHBOARD)
     }
   }
-  checkEmailIsValid = () =>{
-    return emailRegex.test(this.state.email)
+  checkEmailIsValid = (mail) =>{
+    return emailRegex.test(mail)
   }
   checkPasswordIsValid= () =>{
     return this.state.password.length > 4 && spaceRegex.test(this.state.password)
   }
   handleValidation(){
     let isValid= true;
-    if(!this.checkEmailIsValid()){
+    if (emailRegex.test(this.state.email) === false){
+      console.log(this.checkEmailIsValid(this.state.email))
+      debugger
       isValid=false
       this.setState({ emailError: 'Lütfen mail adresinizi kontrol edin.' })
     }
